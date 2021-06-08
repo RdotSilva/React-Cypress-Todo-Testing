@@ -1,3 +1,18 @@
-# Build and test an application using Cypress
+# React Cypress Todo Testing
 
-This repository is the starting point for an official Cypress tutorial. We encourage you to clone this repo and follow along.
+A simple Todo application built using React and tested using Cypress.io
+## Installation
+
+1. Install dependencies
+
+```
+npm install
+```
+
+## Built With
+
+- [React](https://reactjs.org/)
+
+## Screenshots
+
+![Coming Soon](https://upload.wikimedia.org/wikipedia/commons/8/80/Comingsoon.png "Coming Soon")
