@@ -15,7 +15,15 @@ describe("Input form", () => {
 
   context("Form submission", () => {
     it.only("Adds a new todo on submit", () => {
-      cy.get(".new-todo").type("Clean garage").type("{enter");
+      
+      // Stub out the backend API
+      cy.server();
+      cy.route("POST", "/api/todos", {
+        name: "Clean garage",
+        id: 1,
+        isCompleted: false,
+      });
+      cy.get(".new-todo").type("Clean garage").type("{enter}");
     });
   });
 });
