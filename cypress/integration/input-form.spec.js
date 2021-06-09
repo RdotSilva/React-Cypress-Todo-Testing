@@ -4,4 +4,11 @@ describe("Input form", () => {
 
     cy.focused().should("have.class", "new-todo");
   });
+
+  it.only("accepts input", () => {
+    const typedText = "Buy Groceries";
+    cy.visit("http://localhost:3030");
+
+    cy.get(".new-todo").type(typedText).should("have.value", typedText);
+  });
 });
