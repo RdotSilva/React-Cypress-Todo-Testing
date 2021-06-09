@@ -6,6 +6,7 @@ const TodoForm = (props) => {
       <input
         type="text"
         autoFocus
+        value={props.currentTodo}
         className="new-todo"
         placeholder="What needs to be done?"
       />
