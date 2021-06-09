@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import Footer from "./Footer";
+import { saveTodo } from "../lib/service";
 
 const TodoApp = (props) => {
   const [currentTodo, setCurrentTodo] = useState("");
@@ -10,6 +11,13 @@ const TodoApp = (props) => {
 
   const handleNewTodoChange = (event) => {
     setCurrentTodo(event.target.value);
+  };
+
+  const handleTodoSubmit = (event) => {
+    event.preventDefault();
+    const newTodo = { name: currentTodo, isCompleted: false };
+
+    saveTodo(newTodo).then(({ data }) => setTodos([...todos, newTodo]));
   };
 
   return (
@@ -20,6 +28,7 @@ const TodoApp = (props) => {
           <TodoForm
             currentTodo={currentTodo}
             handleNewTodoChange={handleNewTodoChange}
+            handleTodoSubmit={handleTodoSubmit}
           />
         </header>
         <section className="main">
