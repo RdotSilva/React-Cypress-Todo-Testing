@@ -1,40 +1,34 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import Footer from "./Footer";
 
-export default class TodoApp extends Component {
-  constructor(props) {
-    super(props);
+const TodoApp = (props) => {
+  const [currentTodo, setCurrentTodo] = useState("");
+  const [todos, setTodos] = useState([]);
 
-    this.state = {
-      currentTodo: "",
-      todos: [],
-    };
+  const handleNewTodoChange = (event) => {
+    setCurrentTodo(event.target.value);
+  };
 
-    const handleNewTodoChange = (event) => {
-      this.setState({ currentTodo: event.target.value });
-    };
-  }
+  return (
+    <Router>
+      <div>
+        <header className="header">
+          <h1>todos</h1>
+          <TodoForm
+            currentTodo={currentTodo}
+            handleNewTodoChange={handleNewTodoChange}
+          />
+        </header>
+        <section className="main">
+          <TodoList todos={todos} />
+        </section>
+        <Footer />
+      </div>
+    </Router>
+  );
+};
 
-  render() {
-    return (
-      <Router>
-        <div>
-          <header className="header">
-            <h1>todos</h1>
-            <TodoForm
-              currentTodo={this.state.currentTodo}
-              handleNewTodoChange={this.handleNewTodoChange}
-            />
-          </header>
-          <section className="main">
-            <TodoList todos={this.state.todos} />
-          </section>
-          <Footer />
-        </div>
-      </Router>
-    );
-  }
-}
+export default TodoApp;
