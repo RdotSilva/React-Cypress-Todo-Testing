@@ -15,15 +15,23 @@ describe("Input form", () => {
 
   context("Form submission", () => {
     it.only("Adds a new todo on submit", () => {
-      
+      const todoItemText = "Clean garage";
+
       // Stub out the backend API
       cy.server();
       cy.route("POST", "/api/todos", {
-        name: "Clean garage",
+        name: todoItemText,
         id: 1,
         isCompleted: false,
       });
-      cy.get(".new-todo").type("Clean garage").type("{enter}");
+      cy.get(".new-todo")
+        .type(todoItemText)
+        .type("{enter}")
+        .should("have.value", "");
+
+      cy.get(".todo-list li")
+        .should("have.length", 1)
+        .and("contain", todoItemText);
     });
   });
 });
