@@ -17,7 +17,10 @@ const TodoApp = (props) => {
     event.preventDefault();
     const newTodo = { name: currentTodo, isCompleted: false };
 
-    saveTodo(newTodo).then(({ data }) => setTodos([...todos, newTodo]));
+    saveTodo(newTodo).then(
+      ({ data }) => setTodos([...todos, newTodo]),
+      setCurrentTodo("")
+    );
   };
 
   return (
