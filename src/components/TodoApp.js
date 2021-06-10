@@ -8,6 +8,7 @@ import { saveTodo } from "../lib/service";
 const TodoApp = (props) => {
   const [currentTodo, setCurrentTodo] = useState("");
   const [todos, setTodos] = useState([]);
+  const [error, setError] = useState(false);
 
   const handleNewTodoChange = (event) => {
     setCurrentTodo(event.target.value);
@@ -17,10 +18,11 @@ const TodoApp = (props) => {
     event.preventDefault();
     const newTodo = { name: currentTodo, isCompleted: false };
 
-    saveTodo(newTodo).then(
-      ({ data }) => setTodos([...todos, newTodo]),
-      setCurrentTodo("")
-    );
+    saveTodo(newTodo)
+      .then(({ data }) => setTodos([...todos, newTodo]), setCurrentTodo(""))
+      .catch(() => {
+        setError(true);
+      });
   };
 
   return (
@@ -28,6 +30,7 @@ const TodoApp = (props) => {
       <div>
         <header className="header">
           <h1>todos</h1>
+          {error ? <span className="error">ERROR</span> : null}
           <TodoForm
             currentTodo={currentTodo}
             handleNewTodoChange={handleNewTodoChange}
