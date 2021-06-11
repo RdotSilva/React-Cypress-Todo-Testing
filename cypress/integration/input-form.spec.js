@@ -14,11 +14,14 @@ describe("Input form", () => {
   });
 
   context("Form submission", () => {
+    beforeEach(() => {
+      cy.server();
+    });
+
     it("Adds a new todo on submit", () => {
       const todoItemText = "Clean garage";
 
       // Stub out the backend API
-      cy.server();
       cy.route("POST", "/api/todos", {
         name: todoItemText,
         id: 1,
@@ -34,9 +37,8 @@ describe("Input form", () => {
         .and("contain", todoItemText);
     });
 
-    it.only("Shows an error message on a failed submission", () => {
+    it("Shows an error message on a failed submission", () => {
       // Stub API call
-      cy.server();
       cy.route({
         url: "/api/todos",
         method: "POST",
