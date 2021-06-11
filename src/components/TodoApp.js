@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import Footer from "./Footer";
-import { saveTodo } from "../lib/service";
+import { saveTodo, loadTodos } from "../lib/service";
 
 const TodoApp = (props) => {
   const [currentTodo, setCurrentTodo] = useState("");
@@ -24,6 +24,10 @@ const TodoApp = (props) => {
         setError(true);
       });
   };
+
+  useEffect(() => {
+    loadTodos().then(({ data }) => setTodos([...data]));
+  }, []);
 
   return (
     <Router>
