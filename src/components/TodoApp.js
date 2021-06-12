@@ -26,7 +26,9 @@ const TodoApp = (props) => {
   };
 
   useEffect(() => {
-    loadTodos().then(({ data }) => setTodos([...data]));
+    loadTodos()
+      .then(({ data }) => setTodos([...data]))
+      .catch(() => setError(true));
   }, []);
 
   return (
