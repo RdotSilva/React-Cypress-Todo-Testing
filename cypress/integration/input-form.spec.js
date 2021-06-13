@@ -1,9 +1,9 @@
 describe("Input form", () => {
   beforeEach(() => {
-    cy.seedAndVisit();
+    cy.seedAndVisit([]);
   });
 
-  it.only("focuses input on load", () => {
+  it("focuses input on load", () => {
     cy.focused().should("have.class", "new-todo");
   });
 
