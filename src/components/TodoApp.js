@@ -31,6 +31,8 @@ const TodoApp = (props) => {
       .catch(() => setError(true));
   }, []);
 
+  const remainingTodos = todos.filter((todo) => !todo.isCompleted).length;
+
   return (
     <Router>
       <div>
@@ -46,7 +48,7 @@ const TodoApp = (props) => {
         <section className="main">
           <TodoList todos={todos} />
         </section>
-        <Footer />
+        <Footer remainingTodos={remainingTodos} />
       </div>
     </Router>
   );
