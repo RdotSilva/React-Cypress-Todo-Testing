@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import Footer from "./Footer";
-import { saveTodo, loadTodos } from "../lib/service";
+import { saveTodo, loadTodos, destroyTodo } from "../lib/service";
 
 const TodoApp = (props) => {
   const [currentTodo, setCurrentTodo] = useState("");
@@ -23,6 +23,12 @@ const TodoApp = (props) => {
       .catch(() => {
         setError(true);
       });
+  };
+
+  const handleDelete = (id) => {
+    destroyTodo(id).then(() =>
+      setTodos(todos.filter((todo) => todo.id !== id))
+    );
   };
 
   useEffect(() => {
@@ -46,7 +52,7 @@ const TodoApp = (props) => {
           />
         </header>
         <section className="main">
-          <TodoList todos={todos} />
+          <TodoList todos={todos} handleDelete={handleDelete} />
         </section>
         <Footer remainingTodos={remainingTodos} />
       </div>
