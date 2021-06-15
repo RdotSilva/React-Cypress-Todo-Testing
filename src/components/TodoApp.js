@@ -16,7 +16,7 @@ const TodoApp = (props) => {
 
   const handleTodoSubmit = (event) => {
     event.preventDefault();
-    const newTodo = { name: currentTodo, isCompleted: false };
+    const newTodo = { name: currentTodo, isComplete: false };
 
     saveTodo(newTodo)
       .then(({ data }) => setTodos([...todos, newTodo]), setCurrentTodo(""))
@@ -51,7 +51,7 @@ const TodoApp = (props) => {
       .catch(() => setError(true));
   }, []);
 
-  const remainingTodos = todos.filter((todo) => !todo.isCompleted).length;
+  const remainingTodos = todos.filter((todo) => !todo.isComplete).length;
 
   return (
     <Router>
