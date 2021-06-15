@@ -25,6 +25,6 @@ describe("List items", () => {
       response: {},
     });
 
-    cy.get(".todo-list li").first().find(".destroy").click({ force: true });
+    cy.get(".todo-list li").first().find(".destroy").invoke("show").click();
   });
 });
