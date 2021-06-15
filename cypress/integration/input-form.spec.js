@@ -25,7 +25,7 @@ describe("Input form", () => {
       cy.route("POST", "/api/todos", {
         name: todoItemText,
         id: 1,
-        isCompleted: false,
+        isComplete: false,
       });
       cy.get(".new-todo")
         .type(todoItemText)
