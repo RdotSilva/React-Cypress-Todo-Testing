@@ -25,6 +25,10 @@ describe("List items", () => {
       response: {},
     });
 
-    cy.get(".todo-list li").first().find(".destroy").invoke("show").click();
+    cy.get(".todo-list li").as("list");
+
+    cy.get("@list").first().find(".destroy").invoke("show").click();
+
+    cy.get("@list").should("have.length", 3).and("not.contain", "Milk");
   });
 });
