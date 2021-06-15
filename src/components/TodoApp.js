@@ -31,22 +31,19 @@ const TodoApp = (props) => {
     );
   };
 
-  handleToggle (id) {
-    const targetTodo = this.state.todos.find(t => t.id === id)
+  const handleToggle = (id) => {
+    const targetTodo = todos.find((todo) => todo.id === id);
 
     const updatedTodo = {
       ...targetTodo,
-      isComplete: !targetTodo.isComplete
-    }
+      isComplete: !targetTodo.isComplete,
+    };
 
-    updateTodo(updatedTodo)
-      .then(({data}) => {
-        const todos = this.state.todos.map(
-          todo => todo.id === data.id ? data : todo
-        )
-        this.setState({todos: todos})
-      })
-  }
+    updateTodo(updatedTodo).then(({ data }) => {
+      const todos = todos.map((todo) => (todo.id === data.id ? data : todo));
+      setTodos(todos);
+    });
+  };
 
   useEffect(() => {
     loadTodos()
@@ -66,11 +63,14 @@ const TodoApp = (props) => {
             currentTodo={currentTodo}
             handleNewTodoChange={handleNewTodoChange}
             handleTodoSubmit={handleTodoSubmit}
-            
           />
         </header>
         <section className="main">
-          <TodoList todos={todos} handleDelete={handleDelete} handleToggle={handleToggle} />
+          <TodoList
+            todos={todos}
+            handleDelete={handleDelete}
+            handleToggle={handleToggle}
+          />
         </section>
         <Footer remainingTodos={remainingTodos} />
       </div>
