@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import Footer from "./Footer";
-import { saveTodo, loadTodos, destroyTodo } from "../lib/service";
+import { saveTodo, loadTodos, destroyTodo, updateTodo } from "../lib/service";
 
 const TodoApp = (props) => {
   const [currentTodo, setCurrentTodo] = useState("");
@@ -31,6 +31,23 @@ const TodoApp = (props) => {
     );
   };
 
+  handleToggle (id) {
+    const targetTodo = this.state.todos.find(t => t.id === id)
+
+    const updatedTodo = {
+      ...targetTodo,
+      isComplete: !targetTodo.isComplete
+    }
+
+    updateTodo(updatedTodo)
+      .then(({data}) => {
+        const todos = this.state.todos.map(
+          todo => todo.id === data.id ? data : todo
+        )
+        this.setState({todos: todos})
+      })
+  }
+
   useEffect(() => {
     loadTodos()
       .then(({ data }) => setTodos([...data]))
@@ -49,10 +66,11 @@ const TodoApp = (props) => {
             currentTodo={currentTodo}
             handleNewTodoChange={handleNewTodoChange}
             handleTodoSubmit={handleTodoSubmit}
+            
           />
         </header>
         <section className="main">
-          <TodoList todos={todos} handleDelete={handleDelete} />
+          <TodoList todos={todos} handleDelete={handleDelete} handleToggle={handleToggle} />
         </section>
         <Footer remainingTodos={remainingTodos} />
       </div>
