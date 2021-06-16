@@ -8,7 +8,9 @@ describe("Footer", () => {
 
   context("with multiple todos", () => {
     it.only("displays plural todos in count", () => {
-      cy.seedAndVisit();
+      beforeEach(() => {
+        cy.seedAndVisit();
+      });
 
       cy.get(".todo-count").should("contain", "3 todos left");
     });
