@@ -7,12 +7,18 @@ describe("Footer", () => {
   });
 
   context("with multiple todos", () => {
-    it.only("displays plural todos in count", () => {
+    it("displays plural todos in count", () => {
       beforeEach(() => {
         cy.seedAndVisit();
       });
 
       cy.get(".todo-count").should("contain", "3 todos left");
+    });
+
+    it.only("Filters to activate todos", () => {
+      cy.contains("Active").click();
+
+      cy.get(".todo-list li").should("have.length", 3);
     });
   });
 });
