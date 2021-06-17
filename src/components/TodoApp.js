@@ -66,10 +66,15 @@ const TodoApp = (props) => {
           />
         </header>
         <section className="main">
-          <TodoList
-            todos={todos}
-            handleDelete={handleDelete}
-            handleToggle={handleToggle}
+          <Route
+            path="/:filter?"
+            render={({ match }) => (
+              <TodoList
+                todos={todos}
+                handleDelete={handleDelete}
+                handleToggle={handleToggle}
+              />
+            )}
           />
         </section>
         <Footer remainingTodos={remainingTodos} />
