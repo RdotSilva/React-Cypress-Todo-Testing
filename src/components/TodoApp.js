@@ -4,6 +4,7 @@ import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import Footer from "./Footer";
 import { saveTodo, loadTodos, destroyTodo, updateTodo } from "../lib/service";
+import { filterTodos } from "../lib/utils";
 
 const TodoApp = (props) => {
   const [currentTodo, setCurrentTodo] = useState("");
@@ -70,7 +71,7 @@ const TodoApp = (props) => {
             path="/:filter?"
             render={({ match }) => (
               <TodoList
-                todos={todos}
+                todos={filterTodos(match.params.filter, todos)}
                 handleDelete={handleDelete}
                 handleToggle={handleToggle}
               />
