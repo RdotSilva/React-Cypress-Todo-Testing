@@ -7,11 +7,11 @@ describe("Footer", () => {
   });
 
   context("with multiple todos", () => {
-    it("displays plural todos in count", () => {
-      beforeEach(() => {
-        cy.seedAndVisit();
-      });
+    beforeEach(() => {
+      cy.seedAndVisit();
+    });
 
+    it("displays plural todos in count", () => {
       cy.get(".todo-count").should("contain", "3 todos left");
     });
 
