@@ -1,11 +1,10 @@
-const hostUrl = "http://localhost:3030";
-describe("The application loads", () => {
-  it("navigates to the / route", () => {
-    cy.visit(hostUrl);
-  });
+describe("Smoke tests", () => {
+  context("With no todos", () => {
+    it.only("Saves new todos", () => {
+      cy.visit("/");
+      cy.focused().type("Buy milk{enter}");
 
-  it("has the basic Todo list container", () => {
-    cy.visit(hostUrl);
-    cy.get(".todo-list").should("exist");
+      cy.get(".todo-list li").should("have.length", 1);
+    });
   });
 });
