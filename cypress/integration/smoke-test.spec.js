@@ -9,7 +9,12 @@ describe("Smoke tests", () => {
   context("With no todos", () => {
     it.only("Saves new todos", () => {
       cy.visit("/");
+      cy.server();
+      cy.route("POST", "/api/todos").as("create");
+
       cy.focused().type("Buy milk{enter}");
+
+      cy.wait("@create");
 
       cy.get(".todo-list li").should("have.length", 1);
     });
