@@ -19,11 +19,14 @@ const TodoApp = (props) => {
     event.preventDefault();
     const newTodo = { name: currentTodo, isComplete: false };
 
-    saveTodo(newTodo)
-      .then(({ data }) => setTodos([...todos, newTodo]), setCurrentTodo(""))
-      .catch(() => {
-        setError(true);
-      });
+    // Add timeout to mock a slow backend API call
+    setTimeout(() => {
+      saveTodo(newTodo)
+        .then(({ data }) => setTodos([...todos, newTodo]), setCurrentTodo(""))
+        .catch(() => {
+          setError(true);
+        });
+    }, 4500);
   };
 
   const handleDelete = (id) => {
