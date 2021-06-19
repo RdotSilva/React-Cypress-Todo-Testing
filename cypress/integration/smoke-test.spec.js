@@ -7,7 +7,7 @@ describe("Smoke tests", () => {
   });
 
   context("With no todos", () => {
-    it.only("Saves new todos", () => {
+    it("Saves new todos", () => {
       // List of todo items we will except to see
       const items = [
         { text: "Buy milk", expectedLength: 1 },
@@ -26,6 +26,13 @@ describe("Smoke tests", () => {
 
         cy.get(".todo-list li").should("have.length", todo.expectedLength);
       });
+    });
+  });
+  context("With active totos", () => {
+    cy.visit("/");
+
+    it.only("Loads existing data from the database", () => {
+      cy.get(".todo-list li").should("have.length", 4);
     });
   });
 });
