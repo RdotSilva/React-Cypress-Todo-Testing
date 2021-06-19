@@ -29,10 +29,19 @@ describe("Smoke tests", () => {
     });
   });
   context("With active totos", () => {
-    cy.visit("/");
+    beforeEach(() => {
+      cy.fixture("todos").each((todo) => {
+        // Create todo that is incomplete
+        const newTodo = Cypress._.merge(todo, { isCompleted: false });
 
-    it.only("Loads existing data from the database", () => {
-      cy.get(".todo-list li").should("have.length", 4);
+        // Seed into database
+        cy.request("POST", "/api/todos", newTodo);
+      });
+      cy.visit("/");
+
+      it.only("Loads existing data from the database", () => {
+        cy.get(".todo-list li").should("have.length", 4);
+      });
     });
   });
 });
