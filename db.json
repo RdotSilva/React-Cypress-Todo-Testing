@@ -9,6 +9,11 @@
       "name": "Buy eggs",
       "isComplete": false,
       "id": 2
+    },
+    {
+      "name": "Buy bread",
+      "isComplete": false,
+      "id": 3
     }
   ]
 }
