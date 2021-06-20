@@ -10,3 +10,6 @@ export const destroyTodo = (id) =>
 
 export const updateTodo = (todo) =>
   axios.put(`http://localhost:3030/api/todos/${todo.id}`, todo);
+
+export const loadTodoById = (id) =>
+  axios.get(`http://localhost:3030/api/todos/${id}`);
