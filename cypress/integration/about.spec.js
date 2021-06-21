@@ -12,4 +12,13 @@ describe("About page", () => {
     // Get the h1 element
     cy.get(".about-header").contains("About page");
   });
+
+  it("Should have an p element", () => {
+    // Navigate to about page
+    cy.visit("/about");
+    // Get the p element
+    cy.get(".about-text").contains(
+      "Created to test React components using Cypress"
+    );
+  });
 });
