@@ -1,8 +1,10 @@
 const About = (props) => {
   return (
-    <div>
-      <h1>About Page</h1>
-      <p>Created to test React components using Cypress</p>
+    <div className="about-container">
+      <h1 className="about-header">About Page</h1>
+      <p className="about-text">
+        Created to test React components using Cypress
+      </p>
     </div>
   );
 };
