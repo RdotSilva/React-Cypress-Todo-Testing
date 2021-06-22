@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import { saveTodo, loadTodos, destroyTodo, updateTodo } from "../lib/service";
 import { filterTodos } from "../lib/utils";
 import About from "./About";
+import Welcome from "./Welcome";
 
 const TodoApp = (props) => {
   const [currentTodo, setCurrentTodo] = useState("");
@@ -68,6 +69,7 @@ const TodoApp = (props) => {
           />
         </header>
         <section className="main">
+          <Route path="/welcome" component={Welcome} />
           <Route path="about" render={About} />
           <Route
             path="/:filter?"
