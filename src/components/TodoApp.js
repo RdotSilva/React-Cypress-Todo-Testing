@@ -17,6 +17,9 @@ const TodoApp = (props) => {
     setCurrentTodo(event.target.value);
   };
 
+  /**
+   * Submit a todo, saving it to the local .json file database
+   */
   const handleTodoSubmit = (event) => {
     event.preventDefault();
     const newTodo = { name: currentTodo, isComplete: false };
@@ -28,12 +31,18 @@ const TodoApp = (props) => {
       });
   };
 
+  /**
+   * Delete a todo, removing it from the local .json file database
+   */
   const handleDelete = (id) => {
     destroyTodo(id).then(() =>
       setTodos(todos.filter((todo) => todo.id !== id))
     );
   };
 
+  /**
+   * Toggle a todo complete/incomplete
+   */
   const handleToggle = (id) => {
     const targetTodo = todos.find((todo) => todo.id === id);
 
@@ -48,6 +57,9 @@ const TodoApp = (props) => {
     });
   };
 
+  /**
+   * Load todos from local .json file database
+   */
   useEffect(() => {
     loadTodos()
       .then(({ data }) => setTodos([...data]))
