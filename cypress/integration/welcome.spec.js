@@ -9,9 +9,12 @@ describe("About page", () => {
   });
 
   it("Should have an h1 element", () => {
-    it("Should have an h1 element", () => {
-      // Get the h1 element
-      cy.get('[data-testid="welcome-header]').should("exist");
-    });
+    // Get the h1 element
+    cy.get('[data-testid="welcome-header]').should("exist");
+  });
+
+  it("Should have a clickable button", () => {
+    // Get the clickable button
+    cy.get(".welcome-button").click().should("exist");
   });
 });
